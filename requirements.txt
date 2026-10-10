@@ -1,0 +1,12 @@
+numpy==1.26.4
+xgboost==2.1.4
+shap==0.45.1
+scikit-learn==1.6.1
+pandas==2.2.2
+scipy==1.15.3
+statsmodels==0.14.5
+biopython==1.88
+matplotlib==3.10.0
+seaborn==0.13.2
+logomaker==0.8.7
+psutil

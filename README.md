@@ -13,20 +13,22 @@ Enhancers are short non-coding DNA sequences that regulate gene expression. Accu
 EFS-Enhancer introduces a hybrid pipeline that integrates feature engineering, statistical filtering, feature selection, and machine learning to distinguish enhancer sequences from non-enhancer sequences.
 
 ---
-
 ## Reproducing the results
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/hspfatemeh/EFS-Enhancer/blob/main/EFS_Enhancer_Colab.ipynb)
 
 **Google Colab:** open the notebook above and select *Runtime → Run all*. No runtime restart is needed.
 
-**Local** (Python 3.10–3.12):
+**Local:**
 ```bash
 git clone https://github.com/hspfatemeh/EFS-Enhancer.git
 cd EFS-Enhancer
-pip install -r requirements.txt
-python run_all.py
+pip install uv
+uv venv -p 3.11 .venv
+uv pip install --python .venv/bin/python -r requirements.txt
+.venv/bin/python run_all.py
 ```
+(The pinned versions, e.g. numpy 1.26.4, require Python 3.9–3.12; with Python 3.11 already installed, `pip install -r requirements.txt && python run_all.py` also works.)
 
 `run_all.py` does the following:
 - downloads the benchmark (training) and independent (test) datasets from iEnhancer-RD (pinned commit `809aecc`);
@@ -45,5 +47,6 @@ Everything is written to `results/`:
 - motif tables, as CSV
 - `summary_metrics.csv`: all performance metrics
 - `environment.txt`: package versions and hardware
+
 
 GitHub: https://github.com/hspfatemeh

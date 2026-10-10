@@ -1,18 +1,3 @@
-# EFS-Enhancer
-
-**EFS-Enhancer: Identifying Enhancer Sequences Based on Deep Learning with Emphasis on Effective Feature Selection**
-
-EFS-Enhancer is a deep learning framework for enhancer sequence identification that combines biologically meaningful feature extraction. The framework is designed to improve prediction performance while reducing feature redundancy and enhancing model interpretability.
-
----
-
-## Overview
-
-Enhancers are short non-coding DNA sequences that regulate gene expression. Accurate identification of enhancer sequences is essential for understanding gene regulation, disease mechanisms, and functional genomics.
-
-EFS-Enhancer introduces a hybrid pipeline that integrates feature engineering, statistical filtering, feature selection, and machine learning to distinguish enhancer sequences from non-enhancer sequences.
-
----
 ## Reproducing the results
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/hspfatemeh/EFS-Enhancer/blob/main/EFS_Enhancer_Colab.ipynb)
@@ -47,6 +32,3 @@ Everything is written to `results/`:
 - motif tables, as CSV
 - `summary_metrics.csv`: all performance metrics
 - `environment.txt`: package versions and hardware
-
-
-GitHub: https://github.com/hspfatemeh

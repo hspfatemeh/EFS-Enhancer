@@ -6,6 +6,7 @@ Usage (Colab or local):
 All figures (PDF + PNG), tables (CSV), summary_metrics.csv and environment.txt are written to results/.
 """
 import os, sys, subprocess, urllib.request, importlib.metadata
+os.environ["MPLBACKEND"] = "Agg"   # Colab sets an inline backend that does not exist outside the notebook kernel
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt

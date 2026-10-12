@@ -69,7 +69,7 @@ from statsmodels.stats.multitest import multipletests
 from statsmodels.stats.contingency_tables import Table2x2
 from sklearn import metrics
 from sklearn.metrics import matthews_corrcoef
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from xgboost import XGBClassifier
 from Bio.Seq import Seq
 from Bio import motifs as bio_motifs
@@ -294,6 +294,20 @@ keep2 = dedup_mask(train2, test2)
 print(f"Independent sequences identical to benchmark sequences: {(~keep2).sum()} "
       f"(strong: {(~keep2 & (yt2==1)).sum()}, weak: {(~keep2 & (yt2==0)).sum()})")
 report("Layer 2", "Overlap removed (weak only -> SP only)", yt2[keep2], p2[keep2])
+
+# ---- feature-selection stability (Supplementary Table S9): 5-fold stratified CV x 10 seeds = 50 runs ----
+# In each run, XGBoost importance is computed on the training partition only, and the top 20 features are recorded.
+section("Layer 2: feature-selection stability (50 runs)")
+params2 = {k: v[0] for k, v in PARAMS_L2.items()}
+counts = Counter()
+for seed in range(42, 52):
+    for tr, _ in StratifiedKFold(n_splits=5, shuffle=True, random_state=seed).split(X2, y2):
+        m = XGBClassifier(eval_metric='logloss', **params2).fit(X2[tr], y2[tr])
+        counts.update(np.array(names2)[np.argsort(m.feature_importances_)[::-1][:20]])
+stab = pd.DataFrame(counts.most_common(20), columns=["Feature", "Selection_count"])
+stab["Selection_frequency"] = stab.Selection_count / 50
+stab.to_csv(f"{OUT}/Feature_Stability_Layer2.csv", index=False)
+display(stab)
 
 section("SUMMARY")
 summary = pd.DataFrame(SUMMARY)

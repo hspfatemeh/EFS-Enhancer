@@ -1,6 +1,6 @@
 # EFS-Enhancer
 
-**EFS-Enhancer: Identifying Enhancer Sequences Based on Deep Learning with Emphasis on Effective Feature Selection**
+**EFS-Enhancer: Enhancer Sequence Classification through Effective Multi-View Feature Extraction**
 
 EFS-Enhancer is a deep learning framework for enhancer sequence identification that combines biologically meaningful feature extraction. The framework is designed to improve prediction performance while reducing feature redundancy and enhancing model interpretability.
 

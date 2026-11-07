@@ -2,16 +2,31 @@
 
 **EFS-Enhancer: Enhancer Sequence Classification through Effective Multi-View Feature Extraction**
 
-EFS-Enhancer is a deep learning framework for enhancer sequence identification that combines biologically meaningful feature extraction. The framework is designed to improve prediction performance while reducing feature redundancy and enhancing model interpretability.
+EFS-Enhancer is a two-layer, XGBoost-based framework for enhancer identification and enhancer-strength classification. It combines several complementary views of a DNA sequence (learned DNA2Vec embeddings, k-mer and dinucleotide frequencies, GC content, Shannon entropy and motif-based PWM scores) in an interpretable tree-based model, and it explicitly evaluates the contribution of each feature family.
 
 ---
 
 ## Overview
 
-Enhancers are short non-coding DNA sequences that regulate gene expression. Accurate identification of enhancer sequences is essential for understanding gene regulation, disease mechanisms, and functional genomics.
+Enhancers are short non-coding DNA sequences that regulate gene expression. Accurate identification of enhancers is important for understanding gene regulation, disease mechanisms and functional genomics.
 
-EFS-Enhancer introduces a hybrid pipeline that integrates feature engineering, statistical filtering, feature selection, and machine learning to distinguish enhancer sequences from non-enhancer sequences.
+EFS-Enhancer uses two XGBoost classifiers:
 
+- **Layer 1:** enhancer versus non-enhancer sequences.
+- **Layer 2:** strong versus weak enhancers.
+
+Each 200-bp sequence is represented by 189 features:
+
+| Feature family | Description |
+|---|---|
+| DNA2Vec | Fine-tuned 100-dimensional k-mer embeddings (3–5-mers), averaged per sequence |
+| k-mer and dinucleotide | Frequencies of 3-mers and of the 16 dinucleotides |
+| Statistical | GC content and Shannon entropy |
+| Motifs | Position weight matrix (PWM) scores of motifs selected with Fisher's exact test and Benjamini–Hochberg FDR correction |
+
+Feature selection based on XGBoost feature importance is applied in the second layer only. Model behavior is characterized with XGBoost feature importance, SHAP analysis and feature-family ablations.
+
+The model was developed and evaluated on the iEnhancer-2L benchmark (training) and independent (test) datasets.
 ---
 ## Reproducing the results
 
